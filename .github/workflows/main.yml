@@ -29,4 +29,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: katkat055/ITAS276-NodeGoat-KG:latest
+          tags: katkat055/itas276-nodegoat-kg:latest
