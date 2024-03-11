@@ -16,4 +16,4 @@ jobs:
       - name: Test files are visibile
         run: |
             whoami
-            ls-lah
+            ls -lah
