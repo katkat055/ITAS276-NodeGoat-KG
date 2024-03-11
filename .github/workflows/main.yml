@@ -9,6 +9,9 @@ on:
     - cron: '20 17 * * *' 
   
 jobs:
+  deploy:
+    name: "Deploy to ITAS WMD server"
+    runs-on: self-hosted
   semgrep:
     name: semgrep/ci 
     runs-on: self-hosted
