@@ -11,7 +11,7 @@ on:
 jobs:
   semgrep:
     name: semgrep/ci 
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     container:
       image: returntocorp/semgrep
     if: (github.actor != 'dependabot[bot]')
@@ -20,7 +20,7 @@ jobs:
       - run: semgrep --sarif --output semgrep-sast.sarif --config "p/default"
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -40,7 +40,7 @@ jobs:
           tags: katkat055/itas276-nodegoat-kg:latest
 
   security:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Run Snyk to check Docker images for vulnerabilities
         continue-on-error: true
@@ -52,7 +52,7 @@ jobs:
           args: --severity-threshold=high
 
   SAST-Semgrep:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     container:
       image: returntocorp/semgrep
     steps:
