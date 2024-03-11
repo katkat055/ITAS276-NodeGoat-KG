@@ -10,6 +10,8 @@ jobs:
   deploy:
     name: "Deploy to ITAS WMD server"
     runs-on: self-hosted
+    env:
+      PORT: 40514
     steps:
       - name: Copy source code files
         uses: actions/checkout@master
