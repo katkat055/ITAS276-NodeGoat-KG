@@ -17,6 +17,3 @@ jobs:
         run: |
             whoami
             ls-lah
-      - name: Deploy to ITAS WMD server
-        run: |
-          ssh user@itas-wmd-server
