@@ -12,6 +12,14 @@ jobs:
   deploy:
     name: "Deploy to ITAS WMD server"
     runs-on: self-hosted
+    steps:
+      - name: Copy source code files
+        uses: actions/checkout@master
+
+      - name: Test files are visibile
+        run: |
+            whoami
+            ls-lah
   semgrep:
     name: semgrep/ci 
     runs-on: self-hosted
