@@ -64,9 +64,9 @@ jobs:
         # gets the snyk token from github secrets
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          # gets the docker image and reports only vulnerabilities that are high risk
-          image: katkat055/itas276-nodegoat-kg
-          args: --severity-threshold=high
+          # gets the docker image and reports vulnerabilities
+          image: katkat055/itas276-nodegoat-kg:latest
+          args: --file=Dockerfile
       - name: Save Snyk report as pipeline artifact
         uses: actions/upload-artifact@v3
         with:
