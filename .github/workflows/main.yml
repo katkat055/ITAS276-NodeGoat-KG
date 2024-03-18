@@ -68,14 +68,11 @@ jobs:
           # gets the docker image and reports vulnerabilities
           image: katkat055/itas276-nodegoat-kg:latest
           args: --file=Dockerfile
-      - name: List contents of the directory
-        run: ls -R
-        working-directory: ${{ github.workspace }}
       - name: Save Snyk report as pipeline artifact
         uses: actions/upload-artifact@v3
         with:
           name: snyk-sca.sarif
-          path: snyk-sca.sarif
+          path: snyk.sarif
 
   SAST-Semgrep:
     # runs on self-hosted
