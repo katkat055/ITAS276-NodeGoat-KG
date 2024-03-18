@@ -4,60 +4,80 @@ on:
   pull_request: {}
   workflow_dispatch: {}
   push:
+  # pushes changes to the main
     branches: ["master", "main"]
   schedule:
+  # workflow runs on this time
     - cron: '20 17 * * *' 
   
 jobs:
   semgrep:
     name: semgrep/ci 
+    # runs on self-hosted runner
     runs-on: self-hosted
     container:
+    # docker image used
       image: returntocorp/semgrep
     if: (github.actor != 'dependabot[bot]')
     steps:
+      # authenticates with a docker registry
       - uses: actions/checkout@v3
+      # generates a sarif semgrep file
       - run: semgrep --sarif --output semgrep-sast.sarif --config "p/default"
 
   build:
+    # runs on self-hosted
     runs-on: self-hosted
     steps:
       - name: Checkout
+        # clone repo into runner environment
         uses: actions/checkout@v4
       - name: Login to Docker Hub
+        # authenticates with a docker registry
         uses: docker/login-action@v3
         with:
+        # gets the user name and password from github secrets
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Set up Docker Buildx
+        # sets up docker buildx to be used in different platforms
         uses: docker/setup-buildx-action@v3
       - name: Build and push
+        # pushes the code to docker
         uses: docker/build-push-action@v5
         with:
+          # builds a docker image with the latest updates
           context: .
           file: ./Dockerfile
           push: true
           tags: katkat055/itas276-nodegoat-kg:latest
 
   security:
+    # runs on self-hosted
     runs-on: self-hosted
     steps:
       - name: Run Snyk to check Docker images for vulnerabilities
+        # it will continue even if it runs into an error
         continue-on-error: true
         uses: snyk/actions/docker@master
         env:
+        # gets the snyk token from github secrets
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
+          # gets the docker image and reports only vulnerabilities that are high risk
           image: katkat055/itas276-nodegoat-kg
           args: --severity-threshold=high
 
   SAST-Semgrep:
+    # runs on self-hosted
     runs-on: self-hosted
     container:
       image: returntocorp/semgrep
     steps:
+        # clones repo to runner environment
       - name: clone application source code
         uses: actions/checkout@v3
+        # performs a full semgrep scan and generates a semgrep-sast.sarif file
       - name: full semgrep scan
         run: | 
           semgrep --sarif --output semgrep-sast.sarif --config "p/default"
