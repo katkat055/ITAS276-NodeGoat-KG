@@ -52,10 +52,11 @@ jobs:
           push: true
           tags: katkat055/itas276-nodegoat-kg:latest
 
-  security:
+  sca-snyk:
     # runs on self-hosted
     runs-on: self-hosted
     steps:
+      - uses: actions/checkout@v3
       - name: Run Snyk to check Docker images for vulnerabilities
         # it will continue even if it runs into an error
         continue-on-error: true
