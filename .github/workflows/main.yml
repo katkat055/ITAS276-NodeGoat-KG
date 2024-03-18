@@ -27,7 +27,7 @@ jobs:
 
   build:
     # runs on self-hosted
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         # clone repo into runner environment
@@ -54,7 +54,7 @@ jobs:
 
   sca-snyk:
     # runs on self-hosted
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Run Snyk to check Docker images for vulnerabilities
@@ -76,7 +76,7 @@ jobs:
 
   SAST-Semgrep:
     # runs on self-hosted
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     container:
       image: returntocorp/semgrep
     steps:
