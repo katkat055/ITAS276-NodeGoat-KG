@@ -50,7 +50,6 @@ jobs:
           tags: katkat055/itas276-nodegoat-kg:latest
 
   sca-snyk:
-    # runs on self-hosted
     name: Vulnerabilities with Snyk
     runs-on: ubuntu-latest
     steps:
@@ -68,13 +67,15 @@ jobs:
           image: katkat055/itas276-nodegoat-kg:latest
           args: --file=Dockerfile
       - name: Save Snyk report as pipeline artifact
+        run: |
+          some_command_to_generate_sarif > snyk-sca.sarif
+      - name: Upload SARIF file for Snyk
         uses: actions/upload-artifact@v3
         with:
           name: snyk-sca
           path: snyk-sca.sarif
 
   SAST-Semgrep:
-    # runs on self-hosted
     runs-on: ubuntu-latest
     container:
       image: returntocorp/semgrep
