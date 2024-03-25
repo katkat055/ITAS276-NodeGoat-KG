@@ -6,9 +6,6 @@ on:
   push:
   # pushes changes to the main
     branches: ["master", "main"]
-  # schedule:
-  # workflow runs on this time
-    # - cron: '20 17 * * *' 
   
 jobs:
   semgrep:
@@ -54,9 +51,11 @@ jobs:
 
   sca-snyk:
     # runs on self-hosted
+    name: Vulnerabilities with Snyk
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Run Snyk to check Docker images for vulnerabilities
         # it will continue even if it runs into an error
         continue-on-error: true
@@ -71,8 +70,8 @@ jobs:
       - name: Save Snyk report as pipeline artifact
         uses: actions/upload-artifact@v3
         with:
-          name: snyk-sca.sarif
-          path: snyk.sarif
+          name: snyk-sca
+          path: snyk-sca.sarif
 
   SAST-Semgrep:
     # runs on self-hosted
