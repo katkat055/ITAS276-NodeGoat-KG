@@ -69,8 +69,8 @@ jobs:
       - name: Upload SARIF file for Snyk
         uses: actions/upload-artifact@v3
         with:
-          name: snyk-sca
-          path: snyk-sca.sarif
+          name: snyk-sca.sarif
+          path: snyk.sarif
 
   SAST-Semgrep:
     runs-on: ubuntu-latest
