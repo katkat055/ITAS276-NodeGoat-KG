@@ -70,7 +70,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: snyk-sca
-          path: snyk.sarif
+          path: snyk-sca.sarif
 
   SAST-Semgrep:
     runs-on: ubuntu-latest
