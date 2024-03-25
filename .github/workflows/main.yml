@@ -20,7 +20,9 @@ jobs:
       # authenticates with a docker registry
       - uses: actions/checkout@v3
       # generates a sarif semgrep file
-      - run: semgrep --sarif --output semgrep-sast.sarif --config "p/default"
+      # - run: semgrep --sarif --output semgrep-sast.sarif --config "p/default"
+      - run: semgrep --sarif --output /path/to/semgrep-sast.sarif --config "p/default"
+      
 
   build:
     # runs on self-hosted
@@ -83,7 +85,8 @@ jobs:
         # performs a full semgrep scan and generates a semgrep-sast.sarif file
       - name: full semgrep scan
         run: | 
-          semgrep --sarif --output semgrep-sast.sarif --config "p/default"
+          # semgrep --sarif --output semgrep-sast.sarif --config "p/default"
+          semgrep --sarif --output /path/to/output_directory/semgrep-sast.sarif --config "p/default"
       - name: save report as pipeline artifact
         uses: actions/upload-artifact@v3
         with:
