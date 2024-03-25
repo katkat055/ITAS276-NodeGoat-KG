@@ -66,10 +66,6 @@ jobs:
           # gets the docker image and reports vulnerabilities
           image: katkat055/itas276-nodegoat-kg:latest
           args: --file=Dockerfile
-      - name: Save Snyk report as pipeline artifact
-        run: |
-          snyk test --json > snyk-report.json
-          jq -c . snyk-report.json | semgrep-json-to-sarif > snyk-sca.sarif
       - name: Upload SARIF file for Snyk
         uses: actions/upload-artifact@v3
         with:
