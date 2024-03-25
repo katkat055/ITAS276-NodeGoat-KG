@@ -68,7 +68,8 @@ jobs:
           args: --file=Dockerfile
       - name: Save Snyk report as pipeline artifact
         run: |
-          some_command_to_generate_sarif > snyk-sca.sarif
+          snyk test --json > snyk-report.json
+          jq -c . snyk-report.json | semgrep-json-to-sarif > snyk-sca.sarif
       - name: Upload SARIF file for Snyk
         uses: actions/upload-artifact@v3
         with:
