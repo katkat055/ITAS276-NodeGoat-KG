@@ -20,7 +20,15 @@ jobs:
     if: (github.actor != 'dependabot[bot]')
     steps:
       - name: Security Pipeline Starting
-        run: echo "Security Pipeline jobs starting..."
+        uses: tsickert/discord-webhook@v5.3.0
+        with:
+          webhook-url: ${{ secrets.WEBHOOK_URL }}
+          username: ${{github.repository}}
+          avatar-url: https://gravatar.com/avatar/be5d3fe06696117c467f199ddb4f1aed?s=400&d=robohash&r=g
+          embed-title: "Security Pipeline jobs are starting..."
+          embed-url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          embed-description: "[Action details ${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          embed-author-name: "${{ github.triggering_actor }}"
       # authenticates with a docker registry
       - name: Checkout code
         uses: actions/checkout@v3
@@ -32,7 +40,12 @@ jobs:
         uses: tsickert/discord-webhook@v5.3.0
         with:
           webhook-url: ${{ secrets.WEBHOOK_URL }}
-          content: "Semgrep completed"
+          username: ${{github.repository}}
+          avatar-url: https://gravatar.com/avatar/be5d3fe06696117c467f199ddb4f1aed?s=400&d=robohash&r=g
+          embed-title: "Semgrep completed"
+          embed-url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          embed-description: "[Action details ${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          embed-author-name: "${{ github.triggering_actor }}"
       
 
   build:
@@ -109,4 +122,9 @@ jobs:
         uses: tsickert/discord-webhook@v5.3.0
         with:
           webhook-url: ${{ secrets.WEBHOOK_URL }}
-          content: "SAST-Semgrep completed"
+          username: ${{github.repository}}
+          avatar-url: https://gravatar.com/avatar/be5d3fe06696117c467f199ddb4f1aed?s=400&d=robohash&r=g
+          embed-title: "SAST-Semgrep completed"
+          embed-url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          embed-description: "[Action details ${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          embed-author-name: "${{ github.triggering_actor }}"
