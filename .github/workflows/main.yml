@@ -46,9 +46,7 @@ jobs:
           avatar-url: https://gravatar.com/avatar/be5d3fe06696117c467f199ddb4f1aed?s=400&d=robohash&r=g
           embed-title: "Semgrep completed"
           embed-url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          embed-description: |
-            [Action details ${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-            Download SARIF file for Semgrep: [semgrep-sast.sarif](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          embed-description: "[Action details ${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
           embed-author-name: "${{ github.triggering_actor }}"
       
 
@@ -133,5 +131,6 @@ jobs:
           embed-url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           embed-description: |
             [Action details ${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-            Download SARIF file for Semgrep: [semgrep-sast.sarif](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            embed-author-name: "${{ github.triggering_actor }}"
+            Download SARIF file for SAST-Semgrep: [semgrep-sast.sarif](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/semgrep-sast.sarif)
           embed-author-name: "${{ github.triggering_actor }}"
