@@ -19,6 +19,8 @@ jobs:
       image: returntocorp/semgrep
     if: (github.actor != 'dependabot[bot]')
     steps:
+      - name: Security Pipeline Starting
+        run: echo "Security Pipeline jobs starting..."
       # authenticates with a docker registry
       - name: Checkout code
         uses: actions/checkout@v3
@@ -30,7 +32,7 @@ jobs:
         uses: tsickert/discord-webhook@v5.3.0
         with:
           webhook-url: ${{ secrets.WEBHOOK_URL }}
-          content: "Test"
+          content: "Semgrep completed"
       
 
   build:
@@ -101,3 +103,10 @@ jobs:
         with:
           name: semgrep-sast.sarif
           path: semgrep-sast.sarif
+      - name: Security Pipeline Completed
+        run: echo "Security Pipeline jobs completed"
+      - name: Discord Webhook Action
+        uses: tsickert/discord-webhook@v5.3.0
+        with:
+          webhook-url: ${{ secrets.WEBHOOK_URL }}
+          content: "SAST-Semgrep completed"
