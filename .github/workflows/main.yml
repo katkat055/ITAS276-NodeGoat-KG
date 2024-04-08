@@ -101,7 +101,7 @@ jobs:
           path: snyk.sarif
       - name: Discord Webhook Action
         uses: tsickert/discord-webhook@v5.3.0
-        # adds a message on discord that the piepline is complete with attached sarif
+        # adds a message on discord that the sca-snyk is complete
         with:
           webhook-url: ${{ secrets.WEBHOOK_URL }}
           username: ${{github.repository}}
@@ -142,5 +142,5 @@ jobs:
           embed-url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           embed-description: |
             [Action details ${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-            Download SARIF file for SAST-Semgrep: [semgrep-sast.sarif](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            Download SARIF file for SAST-Semgrep: [semgrep-sast.sarif](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/1395421684
           embed-author-name: "${{ github.triggering_actor }}"
