@@ -19,6 +19,7 @@ jobs:
       image: returntocorp/semgrep
     if: (github.actor != 'dependabot[bot]')
     steps:
+    # adds a message on discord when the pipeline is starting
       - name: Security Pipeline Starting
         uses: tsickert/discord-webhook@v5.3.0
         with:
@@ -38,13 +39,16 @@ jobs:
       # runs the discord webhook
       - name: Discord Webhook Action
         uses: tsickert/discord-webhook@v5.3.0
+        # adds a message on discord that semgrep is complete with the sarif
         with:
           webhook-url: ${{ secrets.WEBHOOK_URL }}
           username: ${{github.repository}}
           avatar-url: https://gravatar.com/avatar/be5d3fe06696117c467f199ddb4f1aed?s=400&d=robohash&r=g
           embed-title: "Semgrep completed"
           embed-url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          embed-description: "[Action details ${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          embed-description: |
+            [Action details ${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            Download SARIF file for Semgrep: [semgrep-sast.sarif](https://github.com/${{ github.repository }}/actions/artifacts/${{ github.run_id }}/semgrep-sast)
           embed-author-name: "${{ github.triggering_actor }}"
       
 
@@ -120,11 +124,13 @@ jobs:
         run: echo "Security Pipeline jobs completed"
       - name: Discord Webhook Action
         uses: tsickert/discord-webhook@v5.3.0
+        # adds a message on discord that the piepline is complete with attached sarif
         with:
           webhook-url: ${{ secrets.WEBHOOK_URL }}
           username: ${{github.repository}}
           avatar-url: https://gravatar.com/avatar/be5d3fe06696117c467f199ddb4f1aed?s=400&d=robohash&r=g
           embed-title: "SAST-Semgrep completed"
-          embed-url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          embed-description: "[Action details ${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          embed-url: |
+            [Action details ${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            Download SARIF file for Semgrep: [semgrep-sast.sarif](https://github.com/${{ github.repository }}/actions/artifacts/${{ github.run_id }}/semgrep-sast)
           embed-author-name: "${{ github.triggering_actor }}"
