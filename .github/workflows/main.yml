@@ -48,7 +48,7 @@ jobs:
           embed-url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           embed-description: |
             [Action details ${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-            Download SARIF file for Semgrep: [semgrep-sast.sarif](https://github.com/${{ github.repository }}/actions/${{ github.run_id }})
+            Download SARIF file for Semgrep: [semgrep-sast.sarif](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
           embed-author-name: "${{ github.triggering_actor }}"
       
 
@@ -132,5 +132,5 @@ jobs:
           embed-title: "SAST-Semgrep completed"
           embed-url: |
             [Action details ${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-            Download SARIF file for Semgrep: [semgrep-sast.sarif](https://github.com/${{ github.repository }}/actions/${{ github.run_id }})
+            Download SARIF file for Semgrep: [semgrep-sast.sarif](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
           embed-author-name: "${{ github.triggering_actor }}"
