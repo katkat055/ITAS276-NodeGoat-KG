@@ -142,5 +142,5 @@ jobs:
           embed-url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           embed-description: |
             [Action details ${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-            Download SARIF file for SAST-Semgrep: [semgrep-sast.sarif](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/1395421684
+            Download SARIF file for SAST-Semgrep: [semgrep-sast.sarif](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/1395421684]
           embed-author-name: "${{ github.triggering_actor }}"
